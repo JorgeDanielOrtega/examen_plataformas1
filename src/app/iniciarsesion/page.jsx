@@ -16,7 +16,9 @@ export default function Login() {
 
   // Validation
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required("Por favor ingrese su numero de cedula"),
+    email: Yup.string()
+      .email()
+      .required("Por favor ingrese su correo institucional"),
     password: Yup.string().required("Por favor ingrese su clave"),
   });
 
@@ -28,22 +30,7 @@ export default function Login() {
   const { errors } = formState;
 
   const onSubmit = (data) => {
-    if (data.username != data.password) {
-      message("Error", "El usuario o la contraseña es invalido", ERROR_MESSAGE);
-    } else {
-      const dni = data.username;
-
-      login(dni).then((response) => {
-        console.log('su lgoin', response);
-        if (!isSession()) {
-          message("Error", response.msg, ERROR_MESSAGE);
-        } else {
-          message("Exito", "Has iniciado sesion correctamente");
-          // router.refresh();
-          window.location.reload();
-        }
-      });
-    }
+    console.log(data);
   };
 
   return (
