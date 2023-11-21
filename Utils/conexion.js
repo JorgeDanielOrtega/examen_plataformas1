@@ -6,36 +6,30 @@ export async function get(recurso, jwt = "") {
         "Accept": "application/json"
     }
 
-    let jwt = ''
-
     if (jwt !== "") {
-        const token = getToken()
-        jwt = token;
         header = { ...header, "TEST-KEY": jwt }
     }
 
-
+    console.log(URL + recurso);
+    
     const response = await fetch(URL + recurso, { cache: "no-store", headers: header`` })
 
     console.log(response);
     return response;
 }
 
-export async function post(recurso, jwt = "") {
+export async function post(recurso, data, jwt = "") {
     let header = {
         "Accept": "application/json"
     }
 
-    let jwt = ''
-
     if (jwt !== "") {
-        const token = getToken()
-        jwt = token;
         header = { ...header, "TEST-KEY": jwt }
     }
 
+    console.log(URL + recurso);
 
-    const response = await fetch(URL + recurso, { method: "POST", headers: header`` })
+    const response = await fetch(URL + recurso, { method: "POST", headers: header, body: JSON.stringify(data) })
 
     console.log(response);
     return response;

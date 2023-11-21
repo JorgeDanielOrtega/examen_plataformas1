@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
-import { get } from "./../../../Utils/conexion"
+import { get, post } from "./../../../Utils/conexion";
 import { isSession } from "../../../Utils/sessionStorage";
 import message from "../../../components/mensaje";
 
@@ -28,8 +28,20 @@ export default function Login() {
   // YUP - Error constanst
   const { errors } = formState;
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+
+    data = { resource: "login", email: data.email, password: data.password };
+
+    const response = await post("examen.php", data);
+
+    console.log(response);
+
+    if (response) {
+      saveToken(response.jwt);
+      saveItem("user", response.usuario);
+      saveItem("external", response.external);
+    }
   };
 
   return (
@@ -39,15 +51,15 @@ export default function Login() {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-outline mb-4">
-          <label className="form-label">Usuario</label>
+          <label className="form-label">Correo</label>
           <input
-            {...register("username")}
+            {...register("email")}
             id="username"
             className={`form-control  ${errors.username ? "is-invalid" : ""}`}
           />
-          {errors.username && (
+          {errors.email && (
             <div className="alert alert-danger invalid-feedback">
-              {errors.username?.message}
+              {errors.email?.message}
             </div>
           )}
         </div>

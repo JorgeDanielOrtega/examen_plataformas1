@@ -1,1 +1,1 @@
-export const URL = "URL: https://computacion.unl.edu.ec/pdml/examen1"
+export const URL = "URL: https://computacion.unl.edu.ec/pdml/examen1/"
