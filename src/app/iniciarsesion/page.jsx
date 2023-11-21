@@ -29,17 +29,16 @@ export default function Login() {
   const { errors } = formState;
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     data = { resource: "login", email: data.email, password: data.password };
+
+    console.log('la data', data);
 
     const response = await post("examen.php", data);
 
     console.log(response);
 
     if (response) {
-      saveToken(response.jwt);
-      saveItem("user", response.usuario);
+      saveToken(response.code);
       saveItem("external", response.external);
     }
   };

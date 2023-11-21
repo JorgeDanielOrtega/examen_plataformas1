@@ -3,7 +3,8 @@ import { getToken } from "./sessionStorage";
 
 export async function get(recurso, jwt = "") {
     let header = {
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "Content-type": "application/json"
     }
 
     if (jwt !== "") {
@@ -11,16 +12,17 @@ export async function get(recurso, jwt = "") {
     }
 
     console.log(URL + recurso);
-    
+
     const response = await fetch(URL + recurso, { cache: "no-store", headers: header`` })
 
     console.log(response);
-    return response;
+    return response.json();
 }
 
 export async function post(recurso, data, jwt = "") {
     let header = {
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "Content-type": "application/json"
     }
 
     if (jwt !== "") {
@@ -32,5 +34,5 @@ export async function post(recurso, data, jwt = "") {
     const response = await fetch(URL + recurso, { method: "POST", headers: header, body: JSON.stringify(data) })
 
     console.log(response);
-    return response;
+    return response.json();
 }
