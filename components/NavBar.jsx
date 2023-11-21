@@ -45,15 +45,7 @@ export default function Navbar() {
               )}
               {!isSession() && (
                 <li className="nav-item">
-                  <Link
-                    href="/"
-                    className="navbar-brand"
-                    onClick={() => {
-                      clearSession();
-                      window.location.reload();
-                      router.push("/iniciarsesion");
-                    }}
-                  >
+                  <Link href="/iniciarsesion" className="navbar-brand">
                     Iniciar sesion
                   </Link>
                 </li>
