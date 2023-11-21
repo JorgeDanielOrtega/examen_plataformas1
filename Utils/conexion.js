@@ -26,6 +26,7 @@ export async function post(recurso, data, jwt = "") {
     }
 
     if (jwt !== "") {
+        console.log("hola??");
         header = { ...header, "TEST-KEY": jwt }
     }
 

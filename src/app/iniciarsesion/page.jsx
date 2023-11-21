@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
 import { get, post } from "./../../../Utils/conexion";
-import { isSession } from "../../../Utils/sessionStorage";
+import { isSession, saveItem, saveToken } from "../../../Utils/sessionStorage";
 import message from "../../../components/mensaje";
 
 import { useRouter } from "next/navigation";
@@ -38,9 +38,11 @@ export default function Login() {
     console.log(response);
 
     if (response) {
-      saveToken(response.code);
-      saveItem("external", response.external);
+      saveToken(response.info.code);
+      saveItem("external", response.info.external);
     }
+
+    router.push("/")
   };
 
   return (
