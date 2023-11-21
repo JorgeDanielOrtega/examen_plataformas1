@@ -4,10 +4,9 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
-import { login } from "@/hooks/Api";
-import { isSession } from "@/hooks/SessionUtils";
-import message from "@/components/Message";
-import { ERROR_MESSAGE } from "@/hooks/Constants";
+import { get } from "./../../../Utils/conexion"
+import { isSession } from "../../../Utils/sessionStorage";
+import message from "../../../components/mensaje";
 
 import { useRouter } from "next/navigation";
 
